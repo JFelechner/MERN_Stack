@@ -33,7 +33,7 @@ class Sensei extends Ninja{
         this.wisdom = wisdom;
     }
     speakWisdom(){
-        super.drinkSake()
+        super.drinkSake() // calls on drinkSake() function
         console.log(`Master Splinter - "What one programmer can do in one month, two programmers can do in two months."`)
     }
 }
