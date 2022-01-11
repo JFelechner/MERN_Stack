@@ -40,4 +40,4 @@ const ninja1 = new Ninja("Hyabusa");
 ninja1.sayName();
 ninja1.showStats();
 ninja1.drinkSake();
-console.log(`*Drinks Sake* Sake gives me life! STAT UPDATE: Health + 10 = ${ninja1.health}`)
+console.log(`*Drinks Sake* - Sake gives me life! STAT UPDATE: Health + 10 = ${ninja1.health}`)
