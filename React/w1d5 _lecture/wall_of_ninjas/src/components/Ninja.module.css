@@ -1,0 +1,20 @@
+
+
+.ninja {
+    width: 20%;
+    min-height: 300px;
+    display: inline-block;
+    border: 1px solid black;
+    vertical-align: top;
+    animation: slide-in 3s;
+}
+
+
+@keyframes slide-in {
+    from{
+        transform: translateX(1600px);
+    }
+    to{
+        transform: translate(0px);
+    }
+}

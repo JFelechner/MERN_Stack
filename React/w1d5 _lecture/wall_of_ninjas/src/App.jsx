@@ -1,5 +1,5 @@
 
-// import './App.css';
+import './App.css';
 import Ninja from './components/Ninja';
 
 function App() {
