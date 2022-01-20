@@ -25,7 +25,7 @@ const PokemonFetchAxios = () => {
                 listOfPokemon.map((pokemonObj, i) => {
                     return (
                         <div key={i}>
-                            <li>{pokemonObj.name}</li>
+                            <ol>{pokemonObj.name}</ol>
                         </div>
                     )
                 }
