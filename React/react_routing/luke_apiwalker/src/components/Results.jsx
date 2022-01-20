@@ -31,7 +31,7 @@ const Results = () => {
     const displayError = () => {
         return (
             <>
-                <p>Please enter a ID value</p>
+                <p>"These are not the droids you are looking for"</p>
             </>
         )
     }
