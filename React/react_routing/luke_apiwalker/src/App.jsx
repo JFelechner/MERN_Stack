@@ -11,9 +11,9 @@ import Results from './components/Results';
 
 function App() {
   return (
-    <div className="App">
       <BrowserRouter>
-
+    <div className="App">
+      
           <StarWarsSearch></StarWarsSearch>
 
       <Switch>
@@ -24,8 +24,8 @@ function App() {
 
       </Switch>
 
-      </BrowserRouter>
     </div>
+      </BrowserRouter>
   );
 }
 
