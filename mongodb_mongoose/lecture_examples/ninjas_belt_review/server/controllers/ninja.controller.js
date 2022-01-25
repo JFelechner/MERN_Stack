@@ -7,6 +7,7 @@ module.exports.sayHello = (req, res) => {
 }
 
 module.exports.findAllNinjas = (req, res) => {
+    console.log("Trying to find all ninjas!")
     Ninja.find()
         .then(allNinjas => {
             res.json({ results: allNinjas })
@@ -21,6 +22,21 @@ module.exports.findOneNinja = (req, res) => {
         })
         .catch(err => res.json({ message: 'Something went wrong', error: err }))
 }
+
+module.exports.findRandomNinja = (req, res) => {
+    console.log("finding a random ninja")
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+    //get all the ninjas first, and pick a random index from that array
+    Ninja.find()
+        .then(allNinjas => {
+            let randomIndex = getRandomInt(allNinjas.length)
+            res.json({ results: allNinjas[randomIndex] })
+        })
+        .catch(err => res.json({ message: 'Something went wrong', error: err }))
+}
+
 
 module.exports.createNewNinja = (req, res) => {
     console.log("REQ.BODY--->", req.body)
