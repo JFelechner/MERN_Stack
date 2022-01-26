@@ -8,7 +8,6 @@ const AllNinjas = () => {
 
     let [allNinjas, setAllNinjas] = useState([])
 
-
     useEffect(() => {
         axios.get("http://localhost:8000/api/ninjas/")
             .then(res => {

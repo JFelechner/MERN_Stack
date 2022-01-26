@@ -1,5 +1,7 @@
 
 import NewProductForm from './components/NewProductForm';
+import AllProducts from './components/AllProducts';
+import OneProduct from './components/OneProduct';
 import {
   BrowserRouter, //tells the application we can enable routing
   Switch,
@@ -10,16 +12,22 @@ import {
 function App() {
   return (
     <BrowserRouter>
-    <div className="App container">
-      <h1>Product Manager</h1>
-      <Switch>
+      <div className="App container">
+        <Switch>
 
-        <Route exact path="/">
-          <NewProductForm></NewProductForm>
-        </Route>
+          <Route exact path="/">
+            <h1>Product Manager</h1>
+            <NewProductForm></NewProductForm>
+            <hr />
+            <AllProducts></AllProducts>
+          </Route>
 
-      </Switch>
-    </div>
+          <Route exact path="/products/:id">
+            <OneProduct></OneProduct>
+          </Route>
+
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }
