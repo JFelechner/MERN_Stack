@@ -7,9 +7,11 @@ import {
     Link
 } from "react-router-dom";
 
-const EditProductForm = () => {
+const EditProductForm = (props) => {
 
     const { id } = useParams();
+
+    let [formErrors, setFormErrors] = useState({})
 
     let [productInfo, setProductInfo] = useState({
         title: "",
@@ -22,7 +24,6 @@ const EditProductForm = () => {
             .then(res => {
                 console.log("response is this-->", res)
                 setProductInfo(res.data.results)
-
             })
             .catch(err => console.log(err))
     }, [])
@@ -42,7 +43,11 @@ const EditProductForm = () => {
         axios.put(`http://localhost:8000/api/products/${id}`, productInfo)
             .then(res => {
                 console.log("res after put request-->", res)
-                history.push(`/products/${id}`)
+                if(res.data.error){
+                    setFormErrors(res.data.error.errors)
+                }else{
+                    history.push(`/products/${id}`)
+                }
             })
             .catch(err => console.log(err))
     }
@@ -55,14 +60,17 @@ const EditProductForm = () => {
                 <div className="form-group">
                     <label htmlFor="">Title</label>
                     <input onChange={changeHandler} type="text" name="title" className="form-control" value={productInfo.title} />
+                    <p className="text-danger">{formErrors.title?.message}</p>
                 </div>
                 <div className="form-group">
                     <label htmlFor="">Price</label>
                     <input onChange={changeHandler} type="number" name="price" className="form-control" value={productInfo.price} />
+                    <p className="text-danger">{formErrors.price?.message}</p>
                 </div>
                 <div className="form-group">
                     <label htmlFor="">Description</label>
                     <input onChange={changeHandler} type="text" name="description" className="form-control" value={productInfo.description} />
+                    <p className="text-danger">{formErrors.description?.message}</p>
                 </div>
                 <input type="submit" value="Update Product" className="btn btn-success mt-3" />
             </form>

@@ -7,8 +7,7 @@ import EditProductForm from './components/EditProductForm';
 import {
   BrowserRouter, //tells the application we can enable routing
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 function App() {

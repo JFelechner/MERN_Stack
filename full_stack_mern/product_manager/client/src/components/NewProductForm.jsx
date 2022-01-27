@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import { PromiseProvider } from 'mongoose'
-import { useHistory } from "react-router-dom";
 
 const NewProductForm = (props) => {
 
