@@ -71,7 +71,7 @@ const EditAuthorForm = () => {
                                     <p className="text-danger">{formErrors.authorName?.message}</p>
                                 </div>
                                 <input type="submit" value="Update Author" className="btn btn-primary" /> &nbsp;
-                                <Link to={`/`} className="btn btn-primary" >Cancel</Link>
+                                <Link to={`/`} className="btn btn-primary">Cancel</Link>
                             </form>
 
                         </div>
