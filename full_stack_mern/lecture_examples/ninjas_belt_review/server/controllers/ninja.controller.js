@@ -37,8 +37,8 @@ module.exports.findRandomNinja = (req, res) => {
         .catch(err => res.json({ message: 'Something went wrong', error: err }))
 }
 
-
 module.exports.createNewNinja = (req, res) => {
+    console.log("trying to create new ninja!")
     console.log("REQ.BODY--->", req.body)
     Ninja.create(req.body) //req.body represents the form info
         .then(newlyCreatedNinja => {

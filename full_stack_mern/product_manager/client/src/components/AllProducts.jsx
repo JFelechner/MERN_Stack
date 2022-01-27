@@ -4,8 +4,9 @@ import {
     Link
 } from "react-router-dom";
 
-const AllProducts = () => {
+const AllProducts = (props) => {
     let [allProducts, setAllProducts] = useState([])
+    let [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/products")
@@ -14,7 +15,16 @@ const AllProducts = () => {
                 setAllProducts(res.data.results)
             })
             .catch(err => console.log("Error", err))
-    }, [])
+    }, [deleted, props.newProductAdded])
+
+    const deleteProduct = (productId) => {
+        axios.delete(`http://localhost:8000/api/products/${productId}`)
+            .then(res => {
+                console.log("res when deleting->", res)
+                setDeleted(!deleted)
+            })
+            .catch(err => console.log("ERROR", err))
+    }
 
 
     return (
@@ -22,9 +32,12 @@ const AllProducts = () => {
             <h1>All Products:</h1>
             {allProducts.map((productObj, i) => {
                 return (
-                    <>
-                        <p><Link to={`/products/${productObj._id}`}>{productObj.title}</Link></p>
-                    </>
+                    <div key={i}>
+                        <h4>
+                            <Link to={`/products/${productObj._id}`}>{productObj.title}</Link> | &nbsp;
+                            <button onClick={() => deleteProduct(productObj._id)} className="btn btn-sm btn-danger" >Delete</button>
+                        </h4> 
+                    </div>
                 )
             })}
         </>
