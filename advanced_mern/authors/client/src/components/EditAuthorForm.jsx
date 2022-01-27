@@ -13,12 +13,21 @@ const EditAuthorForm = () => {
     let [authorInfo, setAuthorInfo] = useState({
         authorName: ""
     })
+    let [authorNotFound, setAuthorNotFound] = useState(false) // StateVariable to display alternate message
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/author/${id}`)
             .then(res => {
-                console.log("response is this-->", res)
-                setAuthorInfo(res.data.results)
+                //the res object will have the key error in  res.data.error if the id is not in db.
+                //if the id is in db, the res object will have key results in res.data.results
+                //if res.data.error then we will set some state variable (notFound) to be true. an din the jsx if the notFound show the error paragrapth . otherwise show the authorInfo  
+                console.log(res)
+                if(res.data.results ){  //if the id exists
+                    console.log("response is this-->", res)
+                    setAuthorInfo(res.data.results)
+                } else{ //if the key error exists in res.data-> that means that the id is not in db
+                    setAuthorNotFound(true)
+                }
             })
             .catch(err => console.log(err))
     }, [])
@@ -48,43 +57,57 @@ const EditAuthorForm = () => {
     }
 
     return (
-        <>
-            {/* container */}
-            <div className="container px-4">
+        <div>
 
-                {/* row */}
-                <div className="row gx-5">
+            {
+                authorNotFound? // IF STATEMENT
+                <>
+                    <p className="ms-4 text-danger">We're sorry, but we could not find the author you are looking for. Would you like to add this author to our database? <Link to={`/author/new`}>Add Author</Link></p>
+                    
+                </>
+                
 
-                    {/* left column */}
-                    <div className="col">
 
-                        {/* left header */}
-                        <Link to={`/`}>Home</Link>
-                        <p className="text-$purple">Edit this author:</p>
-
-                        {/* form */}
-                        <div className="p-3 border bg-light">
-                            <form onSubmit={updateAuthorSubmitHandler}>
-                                <div className="form-group">
-                                    <label className="mb-2" htmlFor="">Author Name:</label>
-                                    <input onChange={changeHandler} type="text" name="authorName" className="form-control" value={authorInfo.authorName}/>
-                                    <p className="text-danger">{formErrors.authorName?.message}</p>
+                : // ELSE STATEMENT --> re-route
+                <>
+                    {/* container */}
+                    <div div className="container px-4">
+    
+                        {/* row */}
+                        <div className="row gx-5">
+    
+                            {/* left column */}
+                            <div className="col">
+    
+                                {/* left header */}
+                                <Link to={`/`}>Home</Link>
+                                <p className="text-$purple">Edit this author:</p>
+    
+                                {/* form */}
+                                <div className="p-3 border bg-light">
+                                    <form onSubmit={updateAuthorSubmitHandler}>
+                                        <div className="form-group">
+                                            <label className="mb-2" htmlFor="">Author Name:</label>
+                                            <input onChange={changeHandler} type="text" name="authorName" className="form-control" value={authorInfo.authorName} />
+                                            <p className="text-danger">{formErrors.authorName?.message}</p>
+                                        </div>
+                                        <input type="submit" value="Update Author" className="btn btn-primary" /> &nbsp;
+                                        <Link to={`/`} className="btn btn-primary">Cancel</Link>
+                                    </form>
                                 </div>
-                                <input type="submit" value="Update Author" className="btn btn-primary" /> &nbsp;
-                                <Link to={`/`} className="btn btn-primary">Cancel</Link>
-                            </form>
-
+    
+                            </div>
+    
+                            {/* right column */}
+                            <div className="col">
+                                <div></div>
+                            </div>
                         </div>
-
                     </div>
+                </>
+            }
 
-                    {/* right column */}
-                    <div className="col">
-                        <div></div>
-                    </div>
-                </div>
-            </div>
-        </>
+        </div>
     )
 
 };
