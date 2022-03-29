@@ -18,7 +18,7 @@ function App() {
 
       <Switch>
 
-        <Route exact path = "/:textId/:indexId">
+        <Route exact path = "/:category/:id">
           <Results></Results>
         </Route>
 

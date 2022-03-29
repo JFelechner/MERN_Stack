@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose'); 
-const db_name = "..."; // add database name
+const db_name = "pet_shelter_db"; // add database name
 
 
 mongoose.connect(`mongodb+srv://root:root@cluster0.nsamo.mongodb.net/${db_name}?retryWrites=true&w=majority`, {
