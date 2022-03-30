@@ -21,7 +21,7 @@ function App() {
 
           {/* <Route exact path="/auth/grant">
             <Dashboard></Dashboard>
-          </Route> */}
+          </Route> ***/}
 
         </Switch>
 
