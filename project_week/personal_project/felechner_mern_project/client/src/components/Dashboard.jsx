@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import Tab from './Tab';
 import Achievements from './Achievements';
 import Friends from './Friends';
 import axios from 'axios'
@@ -19,6 +20,14 @@ const Dashboard = () => {
     let [profileInfo, setProfileInfo] = useState([])
     let [showAchievements, setShowAchievements] = useState()
     let [showFriends, setShowFriends] = useState()
+
+    const tabs = [
+        { title: "Achievements", view: "Achievements" },
+        { title: "Friends", view: "Friends" },
+        { title: "Messages", view: "Messages" },
+    ];
+    const [tabsList, setTabsList] = useState(tabs);
+    const [currentTab, setCurrentTab] = useState(0);
 
 
     useEffect(() => {
@@ -60,7 +69,7 @@ const Dashboard = () => {
     }));
 
     return (
-        <>
+
             <ThemeProvider theme={theme}>
                 <Box sx={{
                     '& > :not(style)': {
@@ -119,11 +128,11 @@ const Dashboard = () => {
                                         {profileInfo[1]?.value} G
                                     </Typography>
                                     <Typography
-                                        component="p"
-                                        variant="p"
+                                        component="div"
+                                        variant="div"
                                         sx={{ mt: 5, mb: 3, display: 'flex', color: "primary.contrastText", justifyContent: 'space-between' }}>
-                                        <div>Bio: {profileInfo[7]?.value}</div>
-                                        <div>Location: {profileInfo[8]?.value}</div>
+                                        <p>Bio: {profileInfo[7]?.value}</p>
+                                        <p>Location: {profileInfo[8]?.value}</p>
                                     </Typography>
 
                                 </Container>
@@ -141,63 +150,42 @@ const Dashboard = () => {
                                 <Toolbar
                                     component="nav"
                                     variant="dense"
-                                    sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light' }}
+                                    sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light', justifyContent: 'center' }}
                                 >
-                                    <Typography
-                                        component="p"
-                                        variant="p"
-                                        color="inherit"
-                                        align="center"
-                                        sx={{ flex: 1 }}
-                                    >
-                                        <Button onClick={setShowAchievements} href="" sx={{ color: 'secondary.main' }}>achievements</Button>
-                                        <Button onClick={setShowFriends} href="" sx={{ color: 'secondary.main' }}>friends</Button>
-                                        <Button href="" sx={{ color: 'secondary.main' }}>messages</Button>
-                                    </Typography>
+                                    <Tab
+                                        tabsList={tabsList}
+                                        currentTab={currentTab}
+                                        setCurrentTab={setCurrentTab}
+                                    />
                                 </Toolbar>
 
                                 {/* right column body */}
-                                <Container sx={{ mt: 2, p: .5, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly' }} >
-
-
+                                <Container sx={{
+                                    mt: 2, p: .5, 
+                                    display: 'flex', 
+                                    flexWrap: 'wrap', 
+                                    justifyContent: 'space-evenly', 
+                                    position: 'relative',
+                                    overflow: 'auto',
+                                    maxHeight: 810
+                                }} >
                                     {
-                                        showAchievements?
-                                        <Achievements></Achievements>
-                                        :
-                                        showFriends?
-                                        <Friends></Friends>
-                                        :
-                                        ""
+                                        tabsList[currentTab].view === "Achievements" ?
+                                            <Achievements></Achievements>
+                                            :
+                                            tabsList[currentTab].view === "Friends" ?
+                                                <Friends></Friends>
+                                                :
+                                                ""
                                     }
-                                        
-
-
-
-                                {/* Footer */}
-                                {/* <Toolbar
-                                    component="nav"
-                                    variant="dense"
-                                    sx={{ overflowX: 'auto' }}
-                                >
-                                    <Typography
-                                        component="p"
-                                        variant="p"
-                                        color="inherit"
-                                        align="center"
-                                        sx={{ flex: 1 }}
-                                    >
-                                        <Button href="" sx={{ color: 'secondary.main' }}>See more</Button>
-                                    </Typography>
-                                </Toolbar> */}
-
-                            </Container>
-                        </Item>
+                                </Container>
+                            </Item>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
 
-        </ThemeProvider>
-        </>
+            </ThemeProvider>
+
     )
 };
 
