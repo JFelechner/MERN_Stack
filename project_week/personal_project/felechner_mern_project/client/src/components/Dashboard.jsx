@@ -23,7 +23,7 @@ const Dashboard = () => {
     const tabs = [
         { title: "Achievements", view: "Achievements" },
         { title: "Friends", view: "Friends" },
-        { title: "Clips", view: "Clips" },
+        { title: "GameClips", view: "GameClips" },
     ];
     const [tabsList, setTabsList] = useState(tabs);
     const [currentTab, setCurrentTab] = useState(0);
@@ -175,7 +175,7 @@ const Dashboard = () => {
                                         tabsList[currentTab].view === "Friends" ?
                                             <Friends></Friends>
                                             :
-                                            tabsList[currentTab].view === "Clips" ?
+                                            tabsList[currentTab].view === "GameClips" ?
                                                 <Clips></Clips>
                                                 :
                                                 ""

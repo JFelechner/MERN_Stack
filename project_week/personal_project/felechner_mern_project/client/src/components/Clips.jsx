@@ -8,14 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import { AudioCard, VideoCard } from 'material-ui-player'
-import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import { margin } from '@mui/system';
+
 
 const Clips = () => {
 
