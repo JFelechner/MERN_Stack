@@ -40,6 +40,22 @@ module.exports.findFriends = (req, res) => {
     })
     .catch(err => console.log(err));
 }
+// module.exports.findMessages = (req, res) => {
+//     axios.get("https://xbl.io/api/v2/conversations", config)
+//     .then(chatList => {
+//         console.log(chatList.data)
+//         res.json({results: chatList.data})
+//     })
+//     .catch(err => console.log(err));
+// }
+module.exports.findClips = (req, res) => {
+    axios.get("https://xbl.io/api/v2/dvr/gameclips", config)
+    .then(clipList => {
+        console.log(clipList.data)
+        res.json({results: clipList.data})
+    })
+    .catch(err => console.log(err));
+}
 
 
 

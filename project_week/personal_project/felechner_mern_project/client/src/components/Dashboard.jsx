@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Tab from './Tab';
 import Achievements from './Achievements';
 import Friends from './Friends';
+import Clips from './Clips';
 import axios from 'axios'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
@@ -18,13 +19,11 @@ import { Button } from '@mui/material';
 
 const Dashboard = () => {
     let [profileInfo, setProfileInfo] = useState([])
-    let [showAchievements, setShowAchievements] = useState()
-    let [showFriends, setShowFriends] = useState()
 
     const tabs = [
         { title: "Achievements", view: "Achievements" },
         { title: "Friends", view: "Friends" },
-        { title: "Messages", view: "Messages" },
+        { title: "Clips", view: "Clips" },
     ];
     const [tabsList, setTabsList] = useState(tabs);
     const [currentTab, setCurrentTab] = useState(0);
@@ -70,121 +69,124 @@ const Dashboard = () => {
 
     return (
 
-            <ThemeProvider theme={theme}>
-                <Box sx={{
-                    '& > :not(style)': {
-                        mt: 2,
-                    },
-                }}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={5}>
+        <ThemeProvider theme={theme}>
+            <Box sx={{
+                '& > :not(style)': {
+                    mt: 2,
+                },
+            }}>
+                <Grid container spacing={1}>
+                    <Grid item xs={5}>
 
-                            {/* left column */}
-                            <Item sx={{ backgroundColor: 'primary.dark' }}>
+                        {/* left column */}
+                        <Item sx={{ backgroundColor: 'primary.dark' }}>
 
-                                {/* left column header */}
-                                <Toolbar
-                                    component="nav"
-                                    variant="dense"
-                                    sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light', display: 'flex', justifyContent: 'space-between' }}
+                            {/* left column header */}
+                            <Toolbar
+                                component="nav"
+                                variant="dense"
+                                sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light', display: 'flex', justifyContent: 'space-between' }}
+                            >
+                                <Typography
+                                    component="p"
+                                    variant="p"
+                                    sx={{ color: "primary.contrastText" }}
                                 >
-                                    <Typography
-                                        component="p"
-                                        variant="p"
-                                        sx={{ color: "primary.contrastText" }}
-                                    >
-                                        <img className='profileThumbNail me-2' src={profileInfo[0]?.value} alt="" />
-                                        {profileInfo[2]?.value} - {profileInfo[3]?.value}
-                                    </Typography>
-                                    <Typography>
-                                        <Button href="" sx={{ color: 'secondary.main' }}>logout</Button>
-                                    </Typography>
-                                </Toolbar>
+                                    <img className='profileThumbNail me-2' src={profileInfo[0]?.value} alt="" />
+                                    {profileInfo[2]?.value} - {profileInfo[3]?.value}
+                                </Typography>
+                                <Typography>
+                                    <Button href="" sx={{ color: 'secondary.main' }}>logout</Button>
+                                </Typography>
+                            </Toolbar>
 
-                                {/* left column body */}
-                                <Container sx={{ mt: 3 }}>
-                                    <Typography
-                                        component="h5"
-                                        variant="h4"
-                                        sx={{ display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText" }}
-                                    >
-                                        {profileInfo[2]?.value}
-                                    </Typography>
-                                    <Typography
-                                        component="p"
-                                        variant="p"
-                                        sx={{ display: 'flex', justifyContent: 'flex-start', mt: .5, color: "primary.contrastText" }}
-                                    >
-                                        {profileInfo[6]?.value}
-                                    </Typography>
-                                    <Typography>
-                                        <img className='profilePicture me-2' src={profileInfo[0]?.value} alt="" />
-                                    </Typography>
-                                    <Typography
-                                        component="p"
-                                        variant="p"
-                                        sx={{ mt: 1, display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText" }}
-                                    >
-                                        {profileInfo[1]?.value} G
-                                    </Typography>
-                                    <Typography
-                                        component="div"
-                                        variant="div"
-                                        sx={{ mt: 5, mb: 3, display: 'flex', color: "primary.contrastText", justifyContent: 'space-between' }}>
-                                        <p>Bio: {profileInfo[7]?.value}</p>
-                                        <p>Location: {profileInfo[8]?.value}</p>
-                                    </Typography>
-
-                                </Container>
-                            </Item>
-                        </Grid>
-
-                        {/* ***************************************************************************************** */}
-
-                        <Grid item xs={7}>
-
-                            {/* right column */}
-                            <Item sx={{ backgroundColor: 'primary.dark' }}>
-
-                                {/* right column header */}
-                                <Toolbar
-                                    component="nav"
-                                    variant="dense"
-                                    sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light', justifyContent: 'center' }}
+                            {/* left column body */}
+                            <Container sx={{ mt: 3 }}>
+                                <Typography
+                                    component="h5"
+                                    variant="h4"
+                                    sx={{ display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText" }}
                                 >
-                                    <Tab
-                                        tabsList={tabsList}
-                                        currentTab={currentTab}
-                                        setCurrentTab={setCurrentTab}
-                                    />
-                                </Toolbar>
+                                    {profileInfo[2]?.value}
+                                </Typography>
+                                <Typography
+                                    component="p"
+                                    variant="p"
+                                    sx={{ display: 'flex', justifyContent: 'flex-start', mt: .5, color: "primary.contrastText" }}
+                                >
+                                    {profileInfo[6]?.value}
+                                </Typography>
+                                <Typography>
+                                    <img className='profilePicture me-2' src={profileInfo[0]?.value} alt="" />
+                                </Typography>
+                                <Typography
+                                    component="p"
+                                    variant="p"
+                                    sx={{ mt: 1, display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText" }}
+                                >
+                                    {profileInfo[1]?.value} G
+                                </Typography>
+                                <Typography
+                                    component="div"
+                                    variant="div"
+                                    sx={{ mt: 5, mb: 3, display: 'flex', color: "primary.contrastText", justifyContent: 'space-between' }}>
+                                    <p>Bio: {profileInfo[7]?.value}</p>
+                                    <p>Location: {profileInfo[8]?.value}</p>
+                                </Typography>
 
-                                {/* right column body */}
-                                <Container sx={{
-                                    mt: 2, p: .5, 
-                                    display: 'flex', 
-                                    flexWrap: 'wrap', 
-                                    justifyContent: 'space-evenly', 
-                                    position: 'relative',
-                                    overflow: 'auto',
-                                    maxHeight: 810
-                                }} >
-                                    {
-                                        tabsList[currentTab].view === "Achievements" ?
-                                            <Achievements></Achievements>
+                            </Container>
+                        </Item>
+                    </Grid>
+
+                    {/* ***************************************************************************************** */}
+
+                    <Grid item xs={7}>
+
+                        {/* right column */}
+                        <Item sx={{ backgroundColor: 'primary.dark' }}>
+
+                            {/* right column header */}
+                            <Toolbar
+                                component="nav"
+                                variant="dense"
+                                sx={{ overflowX: 'auto', borderBottom: 1, borderColor: 'primary.light', justifyContent: 'center' }}
+                            >
+                                <Tab
+                                    tabsList={tabsList}
+                                    currentTab={currentTab}
+                                    setCurrentTab={setCurrentTab}
+                                />
+                            </Toolbar>
+
+                            {/* right column body */}
+                            <Container sx={{
+                                mt: 2, p: .5,
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                justifyContent: 'space-evenly',
+                                position: 'relative',
+                                overflow: 'auto',
+                                maxHeight: 1100
+                            }} >
+                                {
+                                    tabsList[currentTab].view === "Achievements" ?
+                                        <Achievements></Achievements>
+                                        :
+                                        tabsList[currentTab].view === "Friends" ?
+                                            <Friends></Friends>
                                             :
-                                            tabsList[currentTab].view === "Friends" ?
-                                                <Friends></Friends>
+                                            tabsList[currentTab].view === "Clips" ?
+                                                <Clips></Clips>
                                                 :
                                                 ""
-                                    }
-                                </Container>
-                            </Item>
-                        </Grid>
+                                }
+                            </Container>
+                        </Item>
                     </Grid>
-                </Box>
+                </Grid>
+            </Box>
 
-            </ThemeProvider>
+        </ThemeProvider>
 
     )
 };
