@@ -15,3 +15,8 @@ body{
   width: 160px;
   border-radius: 50%;
 }
+
+.activityImage{
+  height: 100px;
+  width: 100px;
+}

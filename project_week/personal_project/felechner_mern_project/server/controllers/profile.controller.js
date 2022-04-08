@@ -24,6 +24,14 @@ module.exports.findProfile = (req, res) => {
     })
     .catch(err => console.log(err));
 }
+module.exports.findActivity = (req, res) => {
+    axios.get("https://xbl.io/api/v2/activity/feed", config)
+    .then(activityInfo => {
+        console.log(activityInfo.data)
+        res.json({results: activityInfo.data})
+    })
+    .catch(err => console.log(err));
+}
 module.exports.findAchievements = (req, res) => {
     axios.get("https://xbl.io/api/v2/achievements", config)
     .then(achievementInfo => {

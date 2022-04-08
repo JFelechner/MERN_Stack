@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import Tab from './Tab';
 import Achievements from './Achievements';
@@ -15,10 +14,14 @@ import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 
 const Dashboard = () => {
     let [profileInfo, setProfileInfo] = useState([])
+    let [activityInfo, setActivityInfo] = useState([])
 
     const tabs = [
         { title: "Achievements", view: "Achievements" },
@@ -28,7 +31,6 @@ const Dashboard = () => {
     const [tabsList, setTabsList] = useState(tabs);
     const [currentTab, setCurrentTab] = useState(0);
 
-
     useEffect(() => {
         console.log("inside use effect")
         axios.get(`http://localhost:8000/api/profile`)
@@ -37,9 +39,17 @@ const Dashboard = () => {
                 setProfileInfo(res.data.results.profileUsers[0].settings)
             })
             .catch(err => console.log("Error", err))
-
     }, [])
 
+    useEffect(() => {
+        console.log("inside use effect")
+        axios.get(`http://localhost:8000/api/activity/feed`)
+            .then(res => {
+                console.log("getting all activity info -->", res)
+                setActivityInfo(res.data.results.activityItems)
+            })
+            .catch(err => console.log("Error", err))
+    }, [])
 
     // MUI PAGE THEME
     const theme = createTheme({
@@ -68,14 +78,13 @@ const Dashboard = () => {
     }));
 
     return (
-
         <ThemeProvider theme={theme}>
             <Box sx={{
                 '& > :not(style)': {
                     mt: 2,
                 },
             }}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                     <Grid item xs={5}>
 
                         {/* left column */}
@@ -136,6 +145,69 @@ const Dashboard = () => {
 
                             </Container>
                         </Item>
+
+                        {/* ACTIVITY FEED */}
+                        <Item sx={{ backgroundColor: 'primary.dark', mt: 2 }}>
+                            <Typography
+                                component="p"
+                                variant="h5"
+                                sx={{ mt: 2, ml: 3, mr:2, display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText", borderBottom: 1, borderColor: 'primary.light' }}
+                            >
+                                Recent News
+                            </Typography>
+                            <Container sx={{
+                                mt: 1.5, position: 'relative',
+                                overflow: 'auto',
+                                maxHeight: 645
+                            }}>
+                                {
+                                    activityInfo.map((act, i) => {
+                                        if (activityInfo[i].ugcCaption && activityInfo[i].itemImage != ""){
+                                            return (
+                                                <List sx={{ width: '100%', color: 'white' }}>
+                                                    <ListItem alignItems="flex-start">
+                                                        <Typography sx={{ mt: 1.5 }}>
+                                                            <img className='activityImage me-2' src={activityInfo[i]?.itemImage} alt="" />
+    
+                                                        </Typography>
+                                                        <ListItemText
+                                                            primary={
+                                                                <Typography
+                                                                    sx={{ display: 'inline' }}
+                                                                    component="span"
+                                                                    variant="h6"
+                                                                    color="white"
+                                                                >
+                                                                    {activityInfo[i]?.contentTitle}
+                                                                </Typography>
+                                                            }
+                                                            secondary={
+                                                                <React.Fragment>
+                                                                    <Typography
+                                                                        sx={{ display: 'inline' }}
+                                                                        component="span"
+                                                                        variant="body1"
+                                                                        color="white"
+                                                                    >
+                                                                        {activityInfo[i]?.ugcCaption}
+                                                                    </Typography>
+                                                                </React.Fragment>
+                                                            }
+                                                        />
+                                                    </ListItem>
+                                                    <Divider variant="inset" component="li" />
+                                                </List>
+                                            )
+                                        } else{
+                                            return (
+                                                null
+                                            )
+                                        }
+                                    })
+                                }
+                            </Container>
+                        </Item>
+
                     </Grid>
 
                     {/* ***************************************************************************************** */}
@@ -187,9 +259,7 @@ const Dashboard = () => {
             </Box>
 
         </ThemeProvider>
-
     )
 };
-
 
 export default Dashboard;

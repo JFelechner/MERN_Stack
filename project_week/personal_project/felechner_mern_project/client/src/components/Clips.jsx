@@ -35,7 +35,7 @@ const Clips = () => {
                         <>
                             <Card sx={{ maxWidth: 450, marginBottom: 5 }}>
                                 <CardActionArea>
-                                    <Link href={clipList[i]?.gameClipUris[0].uri}>
+                                    <a href={clipList[i]?.gameClipUris[0].uri} target="_blank">
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="div">
                                                 {clipList[i]?.titleName}
@@ -47,9 +47,9 @@ const Clips = () => {
                                             component="img"
                                             height="250"
                                             image={clipList[i]?.thumbnails[1].uri}
-                                            alt="green iguana"
+                                            alt="game clips"
                                         />
-                                    </Link>
+                                    </a>
                                 </CardActionArea>
 
                             </Card>
