@@ -41,6 +41,7 @@ const Friends = () => {
         <>
             {
                 friendsList.map((fri, i) => {
+                    
                     return (
                         <>
                             {
