@@ -6,12 +6,10 @@ console.log("process env jauns", process.env.SECRET_KEY)
 
 
 
-
 class UserController {
 
     //admin controller features for getting all users
     getAllUsers = (req, res) => {
-        console.log("allUsers")
         User.find()
             .then(allUsers => {
                 res.json({ results: allUsers })
@@ -20,6 +18,8 @@ class UserController {
                 res.json({ error: err })
             })
     }
+
+
 
     register = (req, res) => {
         User.find({ email: req.body.email })
@@ -48,6 +48,8 @@ class UserController {
                 }
             })
             .catch(err => console.log("errr!", err))
+
+
     }
 
     login = async (req, res) => {
@@ -104,24 +106,24 @@ class UserController {
     //       .catch(err => res.json(err));
     // }
 
-    logout= (req, res) => {
+    logout = (req, res) => {
         res.clearCookie('usertoken');
         res.sendStatus(200);
     }
 
-    getLoggedInUser = (req,res)=>{
+
+    getLoggedInUser = (req, res) => {
         //use the info stored in the cookie to get the id of the logged in user and query the db to find a user with that id, and return with info about the logged in user
-        const decodedJWT = jwt.decode(req.cookies.usertoken, {complete:true})
+        const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true })
         // decodedJWT.payload.id
-        User.findOne({_id: decodedJWT.payload.id })
-            .then(foundUser=>{
-                res.json({results: foundUser})
+        User.findOne({ _id: decodedJWT.payload.id })
+            .then(foundUser => {
+                res.json({ results: foundUser })
             })
-            .catch(err=>{
+            .catch(err => {
                 res.json(err)
             })
     }
-
 }
 
 

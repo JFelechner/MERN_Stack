@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     },
 },
     { timestamps: true }
-); 
+);
 
 
 //create a virtual field called "confirm" that is used just to validate the password matches confirm--> the getter and setter above are just creating temporary fields for _confirm
