@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import Tab from './Tab';
 import Achievements from './Achievements';
 import Friends from './Friends';
@@ -22,6 +23,8 @@ import ListItemText from '@mui/material/ListItemText';
 const Dashboard = () => {
     let [profileInfo, setProfileInfo] = useState([])
     let [activityInfo, setActivityInfo] = useState([])
+
+    const history = useHistory();
 
     const tabs = [
         { title: "Achievements", view: "Achievements" },
@@ -49,7 +52,18 @@ const Dashboard = () => {
                 setActivityInfo(res.data.results.activityItems)
             })
             .catch(err => console.log("Error", err))
-    }, [])
+    }, []);
+
+    // LOGOUT
+    const logout = ()=>{
+        axios.get("http://localhost:8000/api/users/logout", {withCredentials:true})
+            .then(res=>{
+                history.push("/")
+            })
+            .catch(err=>{
+                console.log("errrr logging out", err)
+            })
+    }
 
     // MUI PAGE THEME
     const theme = createTheme({
@@ -105,7 +119,7 @@ const Dashboard = () => {
                                     {profileInfo[2]?.value} - {profileInfo[3]?.value}
                                 </Typography>
                                 <Typography>
-                                    <Button href="" sx={{ color: 'secondary.main' }}>logout</Button>
+                                    <Button onClick = {logout} href="" sx={{ color: 'secondary.main' }}>logout</Button>
                                 </Typography>
                             </Toolbar>
 
