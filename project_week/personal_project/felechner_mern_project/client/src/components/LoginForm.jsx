@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button } from '@mui/material';
 import { useHistory } from "react-router-dom";
 
 
@@ -29,9 +31,27 @@ const LoginForm = () => {
             .catch(err => console.log("err when logging in: ", err))
     }
 
+    // MUI PAGE THEME
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#6d6d6d',
+                main: '#424242',
+                dark: '#1b1b1b',
+                contrastText: '#ffffff',
+            },
+            secondary: {
+                light: '#9cff57',
+                main: '#64dd17',
+                dark: '#1faa00',
+                contrastText: '#000000',
+            },
+        },
+    });
+
     return (
-        <div>
-            <h3>Login</h3>
+        <ThemeProvider theme={theme}>
+            
             <form onSubmit={login}>
                 <div className="form-group">
                     <label htmlFor="">Email</label>
@@ -43,9 +63,9 @@ const LoginForm = () => {
                 </div>
                 <p className="text-danger">{loginformErrors}</p>
 
-                <input type="submit" value="Login" className="btn btn-secondary mt-3" />
+                <Button type="submit"  sx={{ color: 'secondary.main' }}>login</Button>
             </form>
-        </div>
+        </ThemeProvider>
     );
 };
 
