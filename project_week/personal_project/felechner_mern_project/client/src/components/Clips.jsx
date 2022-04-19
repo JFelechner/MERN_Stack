@@ -33,11 +33,10 @@ const Clips = () => {
                 clipList.map((clip, i) => {
                     return (
                         <>
-                            <Card sx={{ maxWidth: 450, marginBottom: 5 }}>
-                                <CardActionArea>
-                                    <a href={clipList[i]?.gameClipUris[0].uri} target="_blank">
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
+                            <Card sx={{ maxWidth: 450, marginBottom: 5, backgroundColor: "white" }}>
+                                <CardActionArea href={clipList[i]?.gameClipUris[0].uri} target="_blank">
+                                        <CardContent >
+                                            <Typography sx={{color:"black"}}  variant="h6">
                                                 {clipList[i]?.titleName}
                                             </Typography>
                                             <Typography variant="body2" color="text.secondary">
@@ -49,7 +48,6 @@ const Clips = () => {
                                             image={clipList[i]?.thumbnails[1].uri}
                                             alt="game clips"
                                         />
-                                    </a>
                                 </CardActionArea>
 
                             </Card>

@@ -41,45 +41,157 @@ const Friends = () => {
         <>
             {
                 friendsList.map((fri, i) => {
-                    
-                    return (
-                        <>
-                            {
-                                    <List sx={{ width: '100%', color: 'white' }}>
-                                        <ListItem alignItems="flex-start">
-                                            <ListItemAvatar>
-                                                <Avatar alt={friendsList[i]?.gamertag} src={friendsList[i]?.displayPicRaw} />
-                                            </ListItemAvatar>
-                                            <ListItemText
-                                                primary={
+                    if (friendsList[i].realName != ``) {
+                        if(friendsList[i].presenceState != `Offline` ){
+                            return (
+                                <List sx={{ width: '100%', color: 'white' }}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar alt={friendsList[i]?.gamertag} src={friendsList[i]?.displayPicRaw} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="h6"
+                                                    color="white"
+                                                >
+    
+                                                    {friendsList[i]?.gamertag}&nbsp;
+                                                    - &nbsp;{friendsList[i]?.realName}
+                                                </Typography>
+                                            }
+                                            secondary={
+                                                <React.Fragment>
                                                     <Typography
                                                         sx={{ display: 'inline' }}
                                                         component="span"
-                                                        variant="h6"
-                                                        color="white"
+                                                        variant="body1"
+                                                        color="green"
                                                     >
-                                                        {friendsList[i]?.gamertag} - {friendsList[i]?.realName}
+                                                        {friendsList[i]?.presenceText}
                                                     </Typography>
-                                                }
-                                                secondary={
-                                                    <React.Fragment>
-                                                        <Typography
-                                                            sx={{ display: 'inline' }}
-                                                            component="span"
-                                                            variant="body1"
-                                                            color="white"
-                                                        >
-                                                            {friendsList[i]?.presenceText}
-                                                        </Typography>
-                                                    </React.Fragment>
-                                                }
-                                            />
-                                        </ListItem>
-                                        <Divider variant="inset" component="li" />
-                                    </List>
-                            }
-                        </>
-                    )
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            )
+                        } else {
+                            return (
+                                <List sx={{ width: '100%', color: 'white' }}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar alt={friendsList[i]?.gamertag} src={friendsList[i]?.displayPicRaw} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="h6"
+                                                    color="white"
+                                                >
+    
+                                                    {friendsList[i]?.gamertag}&nbsp;
+                                                    - &nbsp;{friendsList[i]?.realName}
+                                                </Typography>
+                                            }
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body1"
+                                                        color="silver"
+                                                    >
+                                                        {friendsList[i]?.presenceText}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            )
+                        }
+                    } else{
+                        if(friendsList[i].presenceState != `Offline`){
+                            return (
+                                <List sx={{ width: '100%', color: 'white' }}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar alt={friendsList[i]?.gamertag} src={friendsList[i]?.displayPicRaw} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="h6"
+                                                    color="white"
+                                                >
+    
+                                                    {friendsList[i]?.gamertag}
+                                                </Typography>
+                                            }
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body1"
+                                                        color="green"
+                                                    >
+                                                        {friendsList[i]?.presenceText}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            )
+                        } else{
+                            return (
+                                <List sx={{ width: '100%', color: 'white' }}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar alt={friendsList[i]?.gamertag} src={friendsList[i]?.displayPicRaw} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primary={
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="h6"
+                                                    color="white"
+                                                >
+    
+                                                    {friendsList[i]?.gamertag}
+                                                </Typography>
+                                            }
+                                            secondary={
+                                                <React.Fragment>
+                                                    <Typography
+                                                        sx={{ display: 'inline' }}
+                                                        component="span"
+                                                        variant="body1"
+                                                        color="silver"
+                                                    >
+                                                        {friendsList[i]?.presenceText}
+                                                    </Typography>
+                                                </React.Fragment>
+                                            }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </List>
+                            )
+                        }
+                    }
                 })
             }
         </>

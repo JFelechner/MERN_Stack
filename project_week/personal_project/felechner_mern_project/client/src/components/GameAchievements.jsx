@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Card from '@mui/material/Card';
@@ -11,15 +10,16 @@ import {
     Link
 } from "react-router-dom";
 
-const Achievements = () => {
-    let [achievementInfo, setAchievementInfo] = useState([])
+
+const GameAchievements = () => {
+    let [gameAchievementInfo, setGameAchievementInfo] = useState([])
 
     useEffect(() => {
         console.log("inside use effect")
-        axios.get(`http://localhost:8000/api/achievements`)
+        axios.get(`http://localhost:8000/api/game_achievements`)
             .then(res => {
-                console.log("getting all achievement info -->", res)
-                setAchievementInfo(res.data.results.titles)
+                console.log("getting all game achievements -->", res)
+                setGameAchievementInfo(res.data.results.achievements)
             })
             .catch(err => console.log("Error", err))
 
@@ -27,24 +27,24 @@ const Achievements = () => {
 
     return (
         <>
-            {/* Achievement Cards */}
+            {/* Game Achievements */}
+            
             {
-                achievementInfo.map((ach, i) => {
+                gameAchievementInfo.map((gach, i) => {
                     return (
                         <Card sx={{ maxWidth: 120, m: 1 }}>
-                            <CardActionArea
-                            href="/game_acheievments">
+                            <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="120"
-                                    image={achievementInfo[i]?.images[4].url}
+                                    image={gameAchievementInfo[i]?.mediaAssets[0].url}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h7" component="div">
-                                        {achievementInfo[i]?.name}
+                                        sdfbhhdf
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Gamerscore: {achievementInfo[i]?.achievement.currentGamerscore} of {achievementInfo[i]?.achievement.totalGamerscore}
+                                        Gamerscore:
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -52,8 +52,9 @@ const Achievements = () => {
                     )
                 })
             }
+            )
         </>
     )
 }
 
-export default Achievements;
+export default GameAchievements;

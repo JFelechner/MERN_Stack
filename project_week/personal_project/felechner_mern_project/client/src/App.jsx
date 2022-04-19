@@ -2,6 +2,7 @@
 import React from 'react';
 import SignIn from './components/SignIn';
 import Dashboard from './components/Dashboard';
+import GameAchievements from './components/GameAchievements';
 import "./App.css"
 import {
   BrowserRouter,
@@ -19,9 +20,13 @@ function App() {
           <Route exact path="/">
             <SignIn></SignIn>
           </Route>
-          
+
           <Route exact path="/dashboard">
             <Dashboard></Dashboard>
+          </Route>
+
+          <Route exact path="/game_acheievments">
+            <GameAchievements></GameAchievements>
           </Route>
 
           {/* Below is URL to leverage microsoft azur login */}

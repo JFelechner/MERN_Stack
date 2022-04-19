@@ -40,6 +40,14 @@ module.exports.findAchievements = (req, res) => {
     })
     .catch(err => console.log(err));
 }
+module.exports.findGameAchievements = (req, res) => {
+    axios.get("https://xbl.io/api/v2/achievements/title/1892245301", config)
+    .then(gameAchievementInfo => {
+        console.log(gameAchievementInfo.data)
+        res.json({results: gameAchievementInfo.data})
+    })
+    .catch(err => console.log(err));
+}
 module.exports.findFriends = (req, res) => {
     axios.get("https://xbl.io/api/v2/friends", config)
     .then(friendsList => {
