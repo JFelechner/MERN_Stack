@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import {
     Link
 } from "react-router-dom";
@@ -25,33 +26,76 @@ const GameAchievements = () => {
 
     }, [])
 
+    // MUI PAGE THEME
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#6d6d6d',
+                main: '#424242',
+                dark: '#1b1b1b',
+                contrastText: '#ffffff',
+            },
+            secondary: {
+                light: '#9cff57',
+                main: '#64dd17',
+                dark: '#1faa00',
+                contrastText: '#000000',
+            },
+        },
+    });
+
+    // MUI GRID STYLING
+    const Item = styled(Paper)(({ theme }) => ({
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
     return (
         <>
             {/* Game Achievements */}
-            
-            {
-                gameAchievementInfo.map((gach, i) => {
-                    return (
-                        <Card sx={{ maxWidth: 120, m: 1 }}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    height="120"
-                                    image={gameAchievementInfo[i]?.mediaAssets[0].url}
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h7" component="div">
-                                        sdfbhhdf
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        Gamerscore:
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                    )
-                })
-            }
+            <ThemeProvider theme={theme}>
+                <Box sx={{
+                    '& > :not(style)': {
+                        mt: 3,  justifyContent: 'center'
+                    },
+                }}>
+                    <Item sx={{ backgroundColor: 'black' }}>
+                        <Typography></Typography>
+                        <img className='gameAchievementHeader' src={gameAchievementInfo[0]?.mediaAssets[0].url} alt="" />
+                    </Item>
+                    {
+                        gameAchievementInfo.map((gach, i) => {
+                            return (
+                                <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
+                                    <Grid item xs={5}>
+                                        <img className='gameAchievementArt' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" />
+                                    </Grid>
+                                    <Grid item xs={7} sx={{ backgroundColor: 'primary.dark' }} >
+                                        <Typography
+                                            variant="h4"
+                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'flex-start', marginTop: 3, marginLeft: 5 }}>
+                                            {gameAchievementInfo[i]?.name}
+                                            G{gameAchievementInfo[i]?.rewards[0].value}
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'flex-start', marginLeft: 5 }}>
+                                            {gameAchievementInfo[i]?.description}
+                                        </Typography>
+                                        <Typography
+                                            variant="body1"
+                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'flex-start', marginLeft: 5 }}>
+                                            {gameAchievementInfo[i]?.rarity.currentPercentage}% of gamers unlocked this
+                                        </Typography>
+                                    </Grid>
+                                </Item>
+                            )
+                        })
+                    }
+                </Box>
+            </ThemeProvider>
             )
         </>
     )

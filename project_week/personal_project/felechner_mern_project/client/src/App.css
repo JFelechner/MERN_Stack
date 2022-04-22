@@ -20,3 +20,11 @@ body{
   height: 100px;
   width: 100px;
 }
+
+.gameAchievementArt{
+  height: 257px;
+}
+
+.gameAchievementHeader{
+  height: 450px;
+}
