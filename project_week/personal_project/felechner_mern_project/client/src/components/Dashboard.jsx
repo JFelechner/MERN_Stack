@@ -147,7 +147,7 @@ const Dashboard = () => {
                                     variant="p"
                                     sx={{ mt: 1, display: 'flex', justifyContent: 'flex-start', color: "primary.contrastText" }}
                                 >
-                                    {profileInfo[1]?.value} G
+                                    {profileInfo[1]?.value} <div className='profileGamerScoreG ms-1'>G</div>
                                 </Typography>
                                 <Typography
                                     component="div"

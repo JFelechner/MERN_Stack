@@ -28,3 +28,18 @@ body{
 .gameAchievementHeader{
   height: 290px;
 }
+
+.gamerScoreG{
+  background-color: white;
+  color: black;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.profileGamerScoreG{
+  background-color: white;
+  color: black;
+  height: 19px;
+  width: 19px;
+  border-radius: 50%;
+}

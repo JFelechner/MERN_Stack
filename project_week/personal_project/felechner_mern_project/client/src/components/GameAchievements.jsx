@@ -64,34 +64,36 @@ const GameAchievements = () => {
                     },
                 }}>
 
-                    <Item sx={{ backgroundColor: 'black', display: 'flex', alignItems:'center', justifyContent: 'space-between' }}>
-                    <Typography
-                    variant='h2'
-                    sx={{ color: "primary.contrastText", marginLeft: 2 }}>
-                        {gameAchievementInfo[0]?.titleAssociations[0].name}
-                    </Typography>
-                    <Typography
-                    variant="dense"
-                    sx={{ color: "primary.contrastText", marginRight: 2.5}}>
-                        <Button sx={{ color: 'secondary.main' }} href="/dashboard">Dashboard</Button>
-                    </Typography>
+                    <Item sx={{ backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography
+                            variant='h2'
+                            sx={{ color: "primary.contrastText", marginLeft: 2 }}>
+                            {gameAchievementInfo[0]?.titleAssociations[0].name}
+                        </Typography>
+                        <Typography
+                            variant="dense"
+                            sx={{ color: "primary.contrastText", marginRight: 2.5 }}>
+                            <Button sx={{ color: 'secondary.main' }} href="/dashboard">Dashboard</Button>
+                        </Typography>
 
                     </Item>
-                    
+
                     {
                         gameAchievementInfo.map((gach, i) => {
                             return (
                                 <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={5} >
                                         <a href={gameAchievementInfo[i]?.mediaAssets[0].url} target="_blank"><img className='gameAchievementArt' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" /></a>
-                                        
+
                                     </Grid>
-                                    <Grid item xs={7} sx={{ backgroundColor: 'primary.dark' }} >
+                                    <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
                                         <Typography
                                             variant="h4"
-                                            sx={{ color: "primary.contrastText", display: 'flex', marginTop: 3, marginLeft: 5 }}>
+                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom:1, marginLeft: 5 }}>
                                             {gameAchievementInfo[i]?.name}
-                                            G{gameAchievementInfo[i]?.rewards[0].value}
+                                            <div className='d-flex me-4'>
+                                                <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}
+                                            </div>
                                         </Typography>
                                         <Typography
                                             variant="h6"
