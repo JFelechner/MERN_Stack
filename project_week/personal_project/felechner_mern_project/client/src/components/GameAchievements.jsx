@@ -75,7 +75,23 @@ const GameAchievements = () => {
                             sx={{ color: "primary.contrastText", marginRight: 2.5 }}>
                             <Button sx={{ color: 'secondary.main' }} href="/dashboard">Dashboard</Button>
                         </Typography>
+                    </Item>
 
+                    <Item sx={{ backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Box sx={{ backgroundColor: 'primary.dark', marginRight: 2 }}  >
+                            <Typography
+                                variant="h4"
+                                sx={{ backgroundColor: 'primary.dark', color: "primary.contrastText", display: 'flex', margin: 5}}>
+                                Gamerscore:
+                            </Typography>
+                        </Box>
+                        <Box sx={{ backgroundColor: 'primary.dark', marginLeft: 2 }} >
+                            <Typography
+                                variant="h4"
+                                sx={{ color: "primary.contrastText", display: 'flex', margin: 5 }}>
+                                Achievements:  / {gameAchievementInfo.length}
+                            </Typography>
+                        </Box>
                     </Item>
 
                     {
@@ -89,7 +105,7 @@ const GameAchievements = () => {
                                     <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
                                         <Typography
                                             variant="h4"
-                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom:1, marginLeft: 5 }}>
+                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
                                             {gameAchievementInfo[i]?.name}
                                             <div className='d-flex me-4'>
                                                 <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}

@@ -41,7 +41,7 @@ module.exports.findAchievements = (req, res) => {
     .catch(err => console.log(err));
 }
 module.exports.findGameAchievements = (req, res) => {
-    axios.get("https://xbl.io/api/v2/achievements/title/1892245301", config)
+    axios.get("https://xbl.io/api/v2/achievements/title/2043073184", config)
     .then(gameAchievementInfo => {
         console.log(gameAchievementInfo.data)
         res.json({results: gameAchievementInfo.data})
