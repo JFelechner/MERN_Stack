@@ -15,6 +15,7 @@ import {
 
 const GameAchievements = () => {
     let [gameAchievementInfo, setGameAchievementInfo] = useState([])
+    let unlocked = 1;
 
     useEffect(() => {
         console.log("inside use effect")
@@ -81,7 +82,7 @@ const GameAchievements = () => {
                         <Box sx={{ backgroundColor: 'primary.dark', marginRight: 2 }}  >
                             <Typography
                                 variant="h4"
-                                sx={{ backgroundColor: 'primary.dark', color: "primary.contrastText", display: 'flex', margin: 5}}>
+                                sx={{ backgroundColor: 'primary.dark', color: "primary.contrastText", display: 'flex', margin: 5 }}>
                                 Gamerscore:
                             </Typography>
                         </Box>
@@ -89,41 +90,78 @@ const GameAchievements = () => {
                             <Typography
                                 variant="h4"
                                 sx={{ color: "primary.contrastText", display: 'flex', margin: 5 }}>
-                                Achievements:  / {gameAchievementInfo.length}
+
+                                Achievements: {unlocked} / {gameAchievementInfo.length}
                             </Typography>
                         </Box>
                     </Item>
 
                     {
                         gameAchievementInfo.map((gach, i) => {
-                            return (
-                                <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
-                                    <Grid item xs={5} >
-                                        <a href={gameAchievementInfo[i]?.mediaAssets[0].url} target="_blank"><img className='gameAchievementArt' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" /></a>
+                            if (gameAchievementInfo[i].progressState == 'Achieved') {
+                                if(gameAchievementInfo[i].progression.requirements.length == 0){
+                                    unlocked++
+                                } else{
+                                    console.log('we good')
+                                }
+                                return (
+                                    <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
+                                        <Grid item xs={5} >
+                                            <a href={gameAchievementInfo[i]?.mediaAssets[0].url} target="_blank"><img className='gameAchievementArt' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" /></a>
 
-                                    </Grid>
-                                    <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
-                                        <Typography
-                                            variant="h4"
-                                            sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
-                                            {gameAchievementInfo[i]?.name}
-                                            <div className='d-flex me-4'>
-                                                <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}
-                                            </div>
-                                        </Typography>
-                                        <Typography
-                                            variant="h6"
-                                            sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
-                                            {gameAchievementInfo[i]?.description}
-                                        </Typography>
-                                        <Typography
-                                            variant="body1"
-                                            sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
-                                            {gameAchievementInfo[i]?.rarity.currentPercentage}% of gamers unlocked this
-                                        </Typography>
-                                    </Grid>
-                                </Item>
-                            )
+                                        </Grid>
+                                        <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
+                                            <Typography
+                                                variant="h4"
+                                                sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.name}
+                                                <div className='d-flex me-4'>
+                                                    <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}
+                                                </div>
+                                            </Typography>
+                                            <Typography
+                                                variant="h6"
+                                                sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.description}
+                                            </Typography>
+                                            <Typography
+                                                variant="body1"
+                                                sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.rarity.currentPercentage}% of gamers unlocked this
+                                            </Typography>
+                                        </Grid>
+                                    </Item>
+                                )
+                            } else {
+                                return (
+                                    <Item sx={{ backgroundColor: 'black', display: 'flex'}}>
+                                        <Grid item xs={5} >
+                                            <img className='gameAchievementArt opacity-25' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" />
+
+                                        </Grid>
+                                        <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
+                                            <Typography
+                                                variant="h4"
+                                                sx={{  color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.name}
+                                                <div className='d-flex me-4'>
+                                                    <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}
+                                                </div>
+                                            </Typography>
+                                            <Typography
+                                                variant="h6"
+                                                sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.description}
+                                            </Typography>
+                                            <Typography
+                                                variant="body1"
+                                                sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
+                                                {gameAchievementInfo[i]?.rarity.currentPercentage}% of gamers unlocked this
+                                            </Typography>
+                                        </Grid>
+                                    </Item>
+                                )
+                            }
                         })
                     }
                 </Box>
