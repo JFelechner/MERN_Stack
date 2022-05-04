@@ -25,6 +25,11 @@ function App() {
             <Dashboard></Dashboard>
           </Route>
 
+          {/* VARIABLE ROUTE */}
+          <Route exact path="/game_acheievments/:titleId">
+            <GameAchievements></GameAchievements>
+          </Route>
+
           <Route exact path="/game_acheievments">
             <GameAchievements></GameAchievements>
           </Route>

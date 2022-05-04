@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import { useParams } from "react-router";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -14,11 +15,12 @@ import {
 
 
 const GameAchievements = () => {
-    let [gameAchievementInfo, setGameAchievementInfo] = useState([])
-    let unlocked = 1;
+    const { titleId } = useParams();
+    const [gameAchievementInfo, setGameAchievementInfo] = useState([])
 
     useEffect(() => {
         console.log("inside use effect")
+        // axios.get(`http://localhost:8000/api/game_achievements/${titleId}`) // VARIABLE ROUTE
         axios.get(`http://localhost:8000/api/game_achievements`)
             .then(res => {
                 console.log("getting all game achievements -->", res)
@@ -91,7 +93,7 @@ const GameAchievements = () => {
                                 variant="h4"
                                 sx={{ color: "primary.contrastText", display: 'flex', margin: 5 }}>
 
-                                Achievements: {unlocked} / {gameAchievementInfo.length}
+                                Achievements: {gameAchievementInfo.length} / {gameAchievementInfo.length}
                             </Typography>
                         </Box>
                     </Item>
@@ -99,11 +101,6 @@ const GameAchievements = () => {
                     {
                         gameAchievementInfo.map((gach, i) => {
                             if (gameAchievementInfo[i].progressState == 'Achieved') {
-                                if(gameAchievementInfo[i].progression.requirements.length == 0){
-                                    unlocked++
-                                } else{
-                                    console.log('we good')
-                                }
                                 return (
                                     <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
                                         <Grid item xs={5} >
@@ -128,13 +125,15 @@ const GameAchievements = () => {
                                                 variant="body1"
                                                 sx={{ color: "primary.contrastText", display: 'flex', marginLeft: 5 }}>
                                                 {gameAchievementInfo[i]?.rarity.currentPercentage}% of gamers unlocked this
+                                                
                                             </Typography>
                                         </Grid>
                                     </Item>
                                 )
+
                             } else {
                                 return (
-                                    <Item sx={{ backgroundColor: 'black', display: 'flex'}}>
+                                    <Item sx={{ backgroundColor: 'black', display: 'flex' }}>
                                         <Grid item xs={5} >
                                             <img className='gameAchievementArt opacity-25' src={gameAchievementInfo[i]?.mediaAssets[0].url} alt="" />
 
@@ -142,7 +141,7 @@ const GameAchievements = () => {
                                         <Grid item xs={9} sx={{ backgroundColor: 'primary.dark' }} >
                                             <Typography
                                                 variant="h4"
-                                                sx={{  color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
+                                                sx={{ color: "primary.contrastText", display: 'flex', justifyContent: 'space-between', marginTop: 3, marginBottom: 1, marginLeft: 5 }}>
                                                 {gameAchievementInfo[i]?.name}
                                                 <div className='d-flex me-4'>
                                                     <div className='gamerScoreG me-2'>G</div>{gameAchievementInfo[i]?.rewards[0].value}

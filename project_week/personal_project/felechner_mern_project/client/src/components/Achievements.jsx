@@ -33,6 +33,7 @@ const Achievements = () => {
                     return (
                         <Card sx={{ maxWidth: 120, m: 1 }}>
                             <CardActionArea
+                            // href={`/game_acheievments/${achievementInfo[i].titleId}`}> VARIABLE ROUTE
                             href="/game_acheievments">
                                 <CardMedia
                                     component="img"
